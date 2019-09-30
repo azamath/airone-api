@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  title: Airone Listing
+  version: '1.0'
+servers:
+  - url: 'https://listing.air.one/api'
+    description: Production
+  - url: 'http://localhost:3081/api'
+    description: Local
+paths:
+  /agents:
+    get:
+      summary: List of dealer agents
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: ./models/agent.v1.yaml
+                  meta:
+                    $ref: ../common/models/pagination.v1.json
+                required:
+                  - data
+                  - meta
+              examples: {}
+    post:
+      summary: Add/Link new agent
+      tags: []
+      responses: {}
+  '/agents/{user}':
+    parameters:
+      - type: string
+        name: user
+        in: path
+        required: true
+        description: Agent ID
+        schema:
+          type: integer
+    delete:
+      summary: Unlink dealer agent
+      responses:
+        '200':
+          description: OK
+      parameters: []
+components:
+  schemas: {}
+  securitySchemes:
+    API token:
+      name: Authentication
+      type: apiKey
+      in: header

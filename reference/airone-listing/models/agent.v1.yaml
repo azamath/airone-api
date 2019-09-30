@@ -1,0 +1,13 @@
+title: Agent
+type: object
+x-tags:
+  - user
+properties:
+  id:
+    type: integer
+  first_name:
+    type: string
+  last_name:
+    type: string
+required:
+  - id
